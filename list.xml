@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog>
+    <shop>
+        <categories>
+            <category id="101">Категория товаров</category>
+        </categories>
+        <offers>
+            <offer id="12346" type="vendor.model">
+                <typePrefix>Товар</typePrefix>
+                <vendor>Brand</vendor>
+                <model>ABC-02</model>
+                <name>Товар Brand ABC-01</name>
+                <currencyId>KZT</currencyId>
+                <categoryId>101</categoryId>
+                <picture>http://example.com/image02.jpg</picture>
+                <url>http://example.com/product02/</url>
+                <shortDescription>
+                    Короткое описание второго товара
+                </shortDescription>
+            </offer>
+        </offers>
+    </shop>
+</yml_catalog>
