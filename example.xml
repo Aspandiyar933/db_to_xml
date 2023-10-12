@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <yml_catalog>
     <shop>
-        <categories>
-            <category id="101">Категория товаров</category>
-        </categories>
+        <categories></categories>
         <offers>
             <offer id="12346" type="vendor.model">
                 <typePrefix>Товар</typePrefix>
-                <vendor>Brand</vendor>
+                <vendor>BOSCH</vendor>
                 <model>ABC-02</model>
                 <name>Товар Brand ABC-01</name>
                 <currencyId>KZT</currencyId>
