@@ -90,7 +90,7 @@ tree = ET.ElementTree(root)
 try:
     tree.write('your_modified_xml_file.xml', encoding='utf-8', xml_declaration=True)
     print(f"New category added successfully. And has adding {counter} goods")
-    logging.info("New category added successfully. And has adding {counter} goods")
+    logging.info(f"New category added successfully. And has adding {counter} goods")
 except:
     logging.error("Error while writing to file")
 
