@@ -2,22 +2,28 @@ import xml.etree.ElementTree as ET
 import mysql.connector
 from mysql.connector import Error
 from config import *
+import logging 
+
+logging.basicConfig(level=logging.INFO, filename='log.log', filemode='w',
+                    format='%(asctime)s - %(levelname)s - %(message)s)')
 
 try:
     conn = mysql.connector.connect(
         host=HOST,
-        user=USER,
+        user=USER, 
         password=PASSWORD,
         database=DATABASE
     )
 except Error as err:
-    print(f"Error: {err}")
+    logging.error("Error while connecting to MySQL", err)
 
 cursor = conn.cursor()
 
-with open('query.sql', 'r', encoding='utf-8') as file:
-    query = file.read()
-
+try:
+    with open('query.sql', 'r', encoding='utf-8') as file:
+        query = file.read()
+except FileNotFoundError as err:
+    logging.INFO("File not found", err)
 
 cursor.execute(query)
 
@@ -34,7 +40,7 @@ offers = ET.SubElement(shop, "offers")
 
 result = {}
 data_about_goods = {}
-
+counter = 0
 for row in data:
     if not result.get(row[4]) and row[4] != None:
         result[row[4]] = row[5]
@@ -45,6 +51,7 @@ for row in data:
         #categories_element = root.find('.//categories')
         #categories_element.append(category)
     data_about_goods[row[0]] = [row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
+    counter += 1
     offer = ET.SubElement(offers, "offer")    
     offer.set("id", str(row[0]))
     offer.set("type", "vendor.model")
@@ -80,8 +87,12 @@ for row in data:
 
 tree = ET.ElementTree(root)
 
-tree.write('your_modified_xml_file.xml', encoding='utf-8', xml_declaration=True)
-print("New category added successfully.")
+try:
+    tree.write('your_modified_xml_file.xml', encoding='utf-8', xml_declaration=True)
+    print(f"New category added successfully. And has adding {counter} goods")
+    logging.info("New category added successfully. And has adding {counter} goods")
+except:
+    logging.error("Error while writing to file")
 
 #print(data_about_goods)
 
