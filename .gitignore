@@ -1,3 +1,5 @@
 /env
-/newlist.xml
-/config.py
+/__pychache__
+*.log
+/config.py 
+/feed.xml
