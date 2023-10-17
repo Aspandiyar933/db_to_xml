@@ -14,7 +14,7 @@ try:
     with open(os.path.join(BASE_DIR, 'query.sql'), 'r', encoding='utf-8') as file:
         query = file.read()
 except FileNotFoundError as err:
-    logging.INFO("File not found", err)
+    logging.error(f"File not found {str(err)}")
 
 
 try:
@@ -32,7 +32,7 @@ try:
     cursor.close()
     conn.close()
 except Error as err:
-    logging.error("Error while connecting to MySQL", str(err))
+    logging.error("Error while connecting to MySQL %s" % str(err))
 
 
 root = ET.Element("yml_catalog")
@@ -82,7 +82,7 @@ for row in data:
     categoryId.text = str(row[4])
 
     picture = ET.SubElement(offer, "picture")
-    picture.text = 'https://boschcenter.kz/%s' % str(row[3])
+    picture.text = 'https://boschcenter.kz/image/%s' % str(row[3])
 
     url = ET.SubElement(offer, "url")
     url.text = 'https://boschcenter.kz/%s' % str(row[7])
